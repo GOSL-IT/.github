@@ -83,19 +83,3 @@ flowchart LR
     AILAB -.->|vendored| TEST
     TEST -.->|evaluates OCR pipeline of| DOC
 ```
-
-## Branch reference
-
-Per-repo documentation should always reference the **most recently updated branch**.
-
-| Repo | Branch used | Most recent commit |
-|---|---|---|
-| `goslnet_document_retreival` | **`scn-document-ocr-pipeine`** | 2026-09-02 (vs `main` at 2026-07-22) |
-| `goslnet_backend` | **`ldap`** | 2026-08-26 (vs `goslnet_document_retreival` 2026-08-21 and `main` 2026-07-10) |
-| all other repos | `main` | only branch |
-
-Notes:
-
-- `goslnet_backend` keeps one branch per consumer (`ldap`, `goslnet_document_retreival`, …). The `ldap` branch is currently the freshest and its latest commit decouples document-tracker-specific logic from the shared library.
-- On `scn-document-ocr-pipeine` (2026-09-02), the document tracker dropped its local login and now delegates auth to `goslnet_ldap`, verifying the shared SSO cookie with the auth service's public key. SSO is the org-wide auth pattern going forward. The branch name has a typo (`pipeine`) as it exists on GitHub.
-- `goslnet_ldap`'s README documents `goslnet_backend` vendored under `src/`, but no `.gitmodules`/vendored copy exists on its current `main` tree.
